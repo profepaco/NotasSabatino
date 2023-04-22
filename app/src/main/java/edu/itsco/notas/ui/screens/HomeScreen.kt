@@ -11,10 +11,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import edu.itsco.notas.ui.navigation.Screen
 import edu.itsco.notas.ui.theme.NotasTheme
 
 @Composable
-fun HomeScreen(listaNotas: List<String> = List(100){"Nota $it"}){
+fun HomeScreen(
+    listaNotas: List<String> = List(100) { "Nota $it" },
+    navController: NavHostController
+){
     Scaffold(
         topBar = {
             TopAppBar(title = {
@@ -24,7 +30,9 @@ fun HomeScreen(listaNotas: List<String> = List(100){"Nota $it"}){
         floatingActionButton = {
             ExtendedFloatingActionButton(
                 text = { Text("Agregar Nota") },
-                onClick = { /*TODO*/ }
+                onClick = {
+                    navController.navigate(route = Screen.AddNotaScreen.url)
+                }
             )
         },
         floatingActionButtonPosition = FabPosition.Center
@@ -74,6 +82,6 @@ fun CardNotaPreview(){
 @Preview(showBackground = true)
 fun HomeScreenPreview(){
     NotasTheme {
-        HomeScreen()
+        HomeScreen(navController = rememberNavController())
     }
 }
