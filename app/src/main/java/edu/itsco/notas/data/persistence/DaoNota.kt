@@ -1,5 +1,6 @@
 package edu.itsco.notas.data.persistence
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -8,7 +9,7 @@ import androidx.room.Query
 interface DaoNota {
 
     @Query("SELECT * FROM notas")
-    fun getAllNotas(): List<Nota>
+    fun getAllNotas(): LiveData<List<Nota>>
 
     @Insert
     fun insertNota(nota: Nota)
